@@ -1,0 +1,215 @@
+@font-face {
+  font-family: 'Gilmer';
+  src: url('../public/fonts/gilmer/Gilmer\ Regular.otf');
+}
+
+body{
+  font-family: 'Gilmer', sans-serif;
+  font-size: 14px;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+.App {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Home page components ->*/
+
+.Sidebar{
+  height: 100vh;
+  width: 200px;
+  background-color: #5567d5;
+}
+
+.NotesSection{
+  background-color: #f7f8fb;
+  padding: 25px;
+}
+
+.NotesGrid {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Three columns each taking up an equal amount of space */
+  gap: 20px; /* Adjust gap between cards */
+}
+
+
+/* NavBar-> */
+.navbarContent{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 24px 20px;
+  border-bottom: 2px solid #eeeeee;
+}
+
+.navbar .logo *{
+  font-size: 24px;
+  font-weight: bolder;
+  text-decoration: none;
+  background-image: linear-gradient(134deg, #0188ea, #b260c3 50%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar .NavbarLinks *{
+  text-decoration: none;
+  color: rgb(50, 50, 50);
+  font-size: 16px;
+  padding: 0 20px;
+  transition: 5ms ease-in-out;
+}
+
+.navbar .NavbarLinks *:hover{
+  font-weight: bold;
+}
+
+/* Sidebar-> */
+.SidebarItemsList{
+  list-style: none;
+  padding: 0;
+  color: white;
+}
+
+.SidebarItem{
+  height: 40px;
+  margin: 10px 5px 10px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 0 20px 20px 0;
+  transition: 0.25s linear;
+}
+
+#SelectedSideBarItem{
+  background-color: #7d8dea;
+}
+
+.SidebarItem:hover{
+  cursor: pointer;
+  background-color: #6d7ee2;
+}
+
+.SidebarItem:active{
+  background-color: #7d8dea;
+}
+
+.SidebarStrip{
+  background-color: #364288;
+  width: 7.5px;
+  height: 100%;
+  visibility: hidden;
+}
+
+#SelectedSideStrip{
+  visibility: visible;
+}
+
+.SidebarIcon{
+  flex: 20%;
+  /*Center it horizontally:*/
+  display: flex;
+  justify-content: center;
+}
+
+.SidebarItemText{
+  flex: 80%;
+}
+
+/*NoteCard-> */
+.card{
+  max-width: 30vw;
+}
+
+.card .card-body{
+  position: relative;               /*Making this as first non-static parent to make the absolute card-footer stick to the bottom of the card*/
+  height: 100%;                     /*This is important to make the card-body take up the entire height, so that all have equal height */
+  border: 1.6px solid #c0c5ee;    /*This works because card-body's parent(i.e. card) does not have any height defined, hence writing mere 100% pushes both child and parent outwards, until they reach the bounds of the grid, which is defined by the one having highest height*/
+  border-radius: 7px;
+  padding: 10px;
+  transition: 0.5s ease-out;
+}
+
+.card .card-body:hover{
+  cursor: pointer;
+  border: 1px solid #c0c5ee;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  transform: scale(1.03);
+}
+
+.card-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-tag{
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  background-color: #f0f1fb;
+  border: 1px solid #c0c5ee ;
+  border-radius: 5px;
+  padding: 4px 6px;
+}
+
+.CardTagIcon{
+  color: #9ba5e7;
+}
+
+.CardTagText {
+  color: #5a84e1;
+  font-size: 12px;
+}
+
+.card-title{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.card-description{
+  max-height: 50px;                           /*This is important so that cards do not get too high in height when content is large*/
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.CardActionIconEncloser{
+  padding: 7px;
+  display:flex;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 50%;
+}
+
+.CardActionIconEncloser:hover{
+  background-color: #eef0f9;
+  cursor: pointer;
+}
+
+.CardActionIcon{
+  margin: auto;
+  color: #5a84e1;
+}
+
+.card-footer{
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.card-footer .CardFooterRight{
+  display: flex;
+  gap: 10px;
+}
+
