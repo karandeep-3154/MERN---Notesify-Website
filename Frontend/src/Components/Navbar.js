@@ -13,42 +13,25 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-
-    <div className="navbarContent">
+      <div className="navbarContent">
         <div className="logo">
-          <Link to="/">
-            Noteify
-          </Link>
+          <Link to="/">Noteify</Link>
         </div>
-  
-        <div className="NavbarLinks">
-          <Link to="/">
-            Home
-          </Link>
-          <Link to="/about">
-            About
-          </Link>
-  
-        {!localStorage.getItem("token")
-        ?(
-          <>
-            <Link to="/login">
-              Login
-            </Link>
-            <Link to="/signup">
-              Sign Up
-            </Link>
-          </>
-        )
-        :(
-          <Link onClick={HandleLogout}>
-            Log out
-          </Link>        
-        )}
-  
-        </div>
-    </div>
 
+        <div className="NavbarLinks">
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+
+          {!localStorage.getItem("token") ? (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Sign Up</Link>
+            </>
+          ) : (
+            <Link onClick={HandleLogout}>Log out</Link>
+          )}
+        </div>
+      </div>
     </nav>
   );
 };
