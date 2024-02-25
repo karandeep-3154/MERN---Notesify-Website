@@ -11,7 +11,7 @@ const Home = (props) => {
       ) : (
         <div style={{ display: "flex" }}>
           <Sidebar />
-          {/* <Notes showAlert={props.showAlert}/> */}
+          <Notes showAlert={props.showAlert} />
         </div>
       )}
     </>
