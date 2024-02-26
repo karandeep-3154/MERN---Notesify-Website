@@ -3,6 +3,7 @@ import noteContext from "../Context/Notes/Notecontext";
 import AddNote from "./AddNote";
 import "../App.css";
 import NoteCard from "./NoteCard";
+import BasicModal from "./EditNoteModal";
 
 const Notes = (props) => {
   const context = useContext(noteContext);
@@ -157,10 +158,12 @@ const Notes = (props) => {
       <div className="NotesGrid">
         {notes.map((note) => {
           return (
-            <NoteCard
-              title={note.title}
-              description={note.description}
-              tag={note.tag}
+            <BasicModal
+            
+              note_id={note._id}
+              old_title={note.title}
+              old_description={note.description}
+              old_tag={note.tag}
             />
           );
         })}

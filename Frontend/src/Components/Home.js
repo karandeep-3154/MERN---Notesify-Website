@@ -10,20 +10,22 @@ const Home = (props) => {
       {!localStorage.getItem("token") ? (
         <Login showAlert={props.showAlert} />
       ) : (
-        <BasicModal
-          initialTitle={"sdf"}
-          initialDescription={"dsfdsf"}
-          initialTag={"karandeep"}
-        />
+        <div style={{ display: "flex" }}>
+          <Sidebar />
+          <Notes showAlert={props.showAlert} />
+        </div>
       )}
     </>
   );
   {
-    /* <div style={{ display: "flex" }}>
-          <Sidebar />
-          <Notes showAlert={props.showAlert} />
-        </div> */
+    // <BasicModal
+    //       initialTitle={"sdf"}
+    //       initialDescription={"dsfdsf"}
+    //       initialTag={"karandeep"}
+    //     />
   }
+
+  
 };
 
 export default Home;

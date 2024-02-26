@@ -10,7 +10,7 @@ const Navbar = () => {
     navigate("/login"); //redirecting to login page
     window.location.reload(); //reloading page for refreshing components
   };
-
+  
   return (
     <nav className="navbar">
       <div className="navbarContent">

@@ -117,22 +117,22 @@ body {
 .NotesGrid {
   margin-top: 12px;
   display: flex;
-  flex-wrap: wrap; /* Ensure items wrap to next row if necessary */
-  justify-content: flex-start; /* Align items from start */
-  align-content: flex-start; /* Align content from start */
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
 
 /*NoteCard-> */
 .card {
-  width: calc(32% - 10px); /* Adjust the width based on your design */
+  min-width: 27vw;
   margin: 7px; /* Example margin */
-  box-sizing: border-box; /* Ensure padding and border are included in the width */
   height: 190px;
-  max-width: 30vw;
+  max-width: 27vw;
 }
 
 .card .card-body {
-  position: relative; /*Making this as first non-static parent to make the absolute card-footer stick to the bottom of the card*/
+  position: relative;
+  /*Making this as first non-static parent to make the absolute card-footer stick to the bottom of the card*/
   height: 100%; /*This is important to make the card-body take up the entire height, so that all have equal height */
   border: 1.6px solid #c0c5ee; /*This works because card-body's parent(i.e. card) does not have any height defined, hence writing mere 100% pushes both child and parent outwards, until they reach the bounds of the grid, which is defined by the one having highest height*/
   border-radius: 7px;
@@ -222,4 +222,30 @@ body {
 .card-footer .CardFooterRight {
   display: flex;
   gap: 10px;
+}
+
+/* Modal css */
+.ModalButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ModalButtons button {
+  margin: 21px 0 0 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #657bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 5.3s;
+}
+.ModalButtons button:hover {
+  /* background-color: purple;
+   */
+
+  background-image: linear-gradient(#b10aa4, rgb(70, 70, 190));
 }
