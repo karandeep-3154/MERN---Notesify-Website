@@ -61,6 +61,7 @@ body {
 .SidebarItemsList {
   list-style: none;
   padding: 0;
+  min-height: 100vh;
   height: inherit;
   color: white;
 }

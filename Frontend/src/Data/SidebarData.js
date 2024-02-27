@@ -8,7 +8,7 @@ export const SidebarData = [
     {
         title: "All Notes",
         icon: <SubjectRoundedIcon />,
-        link: "/allNotes"
+        link: "/"
     },
 
     {
@@ -20,7 +20,7 @@ export const SidebarData = [
     {
         title: "Archive",
         icon: <ArchiveOutlinedIcon />,
-        link: "/archive"
+        link: "/archived"
     },
 
     {
