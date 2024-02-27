@@ -7,6 +7,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import Box from "@mui/material/Box";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -30,9 +31,10 @@ export default function BasicModal({
   old_title,
   old_description,
   old_tag,
+  old_favourite,
 }) {
   const context = useContext(noteContext);
-  const { editNote } = context;
+  const { editNote, addtoFavourite, removefromFavourite } = context;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -40,6 +42,8 @@ export default function BasicModal({
   const [title, setTitle] = useState(old_title);
   const [description, setDescription] = useState(old_description);
   const [tag, setTag] = useState(old_tag);
+  const [favourite, setFavourite] = useState(old_favourite);
+
   const handleTagChange = (e) => {
     setTag(e.target.value);
   };
@@ -53,6 +57,18 @@ export default function BasicModal({
   const handleEdit = () => {
     editNote(note_id, title, description, tag);
     handleClose();
+  };
+
+  const changeFavourites = () => {
+    if (!favourite) {
+      addtoFavourite(note_id, title, description, tag);
+      setFavourite(true);
+      console.log("clicked for adding", title);
+    } else {
+      removefromFavourite(note_id, title, description, tag);
+      setFavourite(false);
+      console.log("clicked for removing", title);
+    }
   };
 
   useEffect(() => {
@@ -95,10 +111,19 @@ export default function BasicModal({
             <div className="card-footer">
               <div className="CardFooterLeft">
                 <div className="CardActionIconEncloser">
-                  <FavoriteBorderOutlinedIcon
-                    className="CardActionIcon"
-                    sx={{ fontSize: 20 }}
-                  />
+                  {favourite ? (
+                    <FavoriteIcon
+                      style={{ color: "#5466d4" }}
+                      sx={{ fontSize: 20 }}
+                      onClick={() => changeFavourites()}
+                    />
+                  ) : (
+                    <FavoriteBorderOutlinedIcon
+                      className="CardActionIcon"
+                      sx={{ fontSize: 20 }}
+                      onClick={() => changeFavourites()}
+                    />
+                  )}
                 </div>
               </div>
 

@@ -159,11 +159,11 @@ const Notes = (props) => {
         {notes.map((note) => {
           return (
             <BasicModal
-            
               note_id={note._id}
               old_title={note.title}
               old_description={note.description}
               old_tag={note.tag}
+              old_favourite={note.favourite}
             />
           );
         })}
