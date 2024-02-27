@@ -1,43 +1,133 @@
-import React, {useContext, useState} from 'react'
-import noteContext from '../Context/Notes/Notecontext';
+import * as React from "react";
+import { useState, useEffect, useContext } from "react";
+import noteContext from "../Context/Notes/Notecontext";
+import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
-const AddNote = (props) => {
-    const context = useContext(noteContext);
-    const {addNote} = context;
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #b260c3",
+  boxShadow: 129,
+  boxShadow: "50px 50px 198px rgb(250, 238, 255)",
+  p: 4,
+};
 
-    const [note, setNote] = useState({title: "", description: "", tag: ""})
+export default function AddModal() {
+  const context = useContext(noteContext);
+  const { addNote } = context;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-    const handleClick = (e)=>{
-        e.preventDefault();
-        addNote(note.title, note.description, note.tag);
-        setNote({title: "", description: "", tag: ""})
-        props.showAlert("Note Added Successfully","success");  //showing alert
-    }
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [tag, setTag] = useState("");
 
-    const onChange = (e)=>{
-        setNote({...note, [e.target.name]: e.target.value})
-    }
-    return (
-        <div className="container my-3">
-            <h2>Add a Note</h2>
-            <form className="my-3">
-                <div className="mb-3">
-                    <label htmlFor="title" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="title" name="title" aria-describedby="emailHelp" placeholder='Description must be atleast 5 characters'value={note.title} onChange={onChange} minLength={5} required /> 
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Description</label>
-                    <input type="text" className="form-control" id="description" placeholder='Description must be atleast 5 characters' name="description" value={note.description} onChange={onChange} minLength={5} required />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="tag" className="form-label">Tag</label>
-                    <input type="text" className="form-control"  placeholder='Optional'id="tag" name="tag" value={note.tag} onChange={onChange} minLength={5} required />
-                </div>
-               
-                <button disabled={note.title.length<5 || note.description.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>Add Note</button>
-            </form>
-        </div>
-    )
+  const handleTagChange = (e) => {
+    setTag(e.target.value);
+  };
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleAdd = () => {
+    addNote(tag, title, description);
+    setTag("");
+    setDescription("");
+    setTitle("");
+    handleClose();
+  };
+
+  //   useEffect(() => {
+  //     setTitle(old_title);
+  //     setDescription(old_description);
+  //     setTag(old_tag);
+  //   }, [open, old_title, old_description, old_tag]);
+
+  return (
+    <div>
+      <AddCircleSharpIcon
+        id="addButton"
+        style={{ color: "#5466d4", fontSize: "72px" }}
+        onClick={handleOpen}
+      />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography variant="h5" component="h2">
+            Add a New Note...
+          </Typography>
+          <Typography id="modal-modal-tag" sx={{ mt: 2 }}>
+            <TextField
+              label="Tag"
+              variant="outlined"
+              fullWidth
+              value={tag}
+              onChange={handleTagChange}
+              sx={{ mt: 2 }}
+            />
+          </Typography>
+          <Typography id="modal-modal-title" sx={{ mt: 2 }}>
+            <TextField
+              label="Title"
+              variant="outlined"
+              fullWidth
+              value={title}
+              placeholder="Title should be of Length 5 or more!"
+              onChange={handleTitleChange}
+              sx={{ mt: 2 }}
+            />
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <TextField
+              label="description"
+              variant="outlined"
+              fullWidth
+              multiline
+              placeholder="Description should be of Length 5 or more!"
+              rows={4}
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </Typography>
+          <div className="ModalButtons">
+            <button
+              disabled={title.length < 5 || description.length < 5}
+              style={{
+                backgroundColor:
+                  title.length < 5 || description.length < 5 ? "#ccc" : "",
+              }}
+              onClick={() => {
+                handleAdd();
+              }}
+            >
+              Add Note
+            </button>
+            <button
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </Box>
+      </Modal>
+    </div>
+  );
 }
-
-export default AddNote

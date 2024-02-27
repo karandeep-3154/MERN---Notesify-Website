@@ -114,8 +114,16 @@ body {
   background-color: #f7f8fb;
   min-width: 88%;
   padding: 25px;
+  position: relative;
 }
-
+#addButton {
+  position: fixed;
+  right: 60px;
+  bottom: 60px;
+}
+#addButton:hover {
+  cursor: pointer;
+}
 .NotesGrid {
   margin-top: 12px;
   display: flex;
