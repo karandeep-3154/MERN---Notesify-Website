@@ -6,6 +6,8 @@ const NoteState = (props) => {
   const notesInitial = [];
   const [notes, setNotes] = useState(notesInitial);
   const [FavouriteNotes, setFavouriteNotes] = useState([]);
+  const [ArchivedNotes, setArchivedNotes] = useState([]);
+  const [BinNotes, setBinNotes] = useState([]);
 
   // Get all Notes
 
@@ -101,20 +103,6 @@ const NoteState = (props) => {
     // eslint-disable-next-line
     const json = await response.json();
     console.log(json);
-    // let newNotes = JSON.parse(JSON.stringify(notes));
-    // // Logic to edit in client
-    // for (let index = 0; index < newNotes.length; index++) {
-    //   const element = newNotes[index];
-    //   if (element._id === id) {
-    //     newNotes[index].title = title;
-    //     newNotes[index].description = description;
-    //     newNotes[index].tag = tag;
-    //     break;
-    //   }
-    // }
-
-    // const favouriteNotes = newNotes.filter((note) => note.favourite);
-    // setFavouriteNotes(favouriteNotes);
     getFavouriteNotes();
   };
   const removefromFavourite = async (id, title, description, tag) => {
@@ -153,18 +141,69 @@ const NoteState = (props) => {
     const json = await response.json();
     setFavouriteNotes(json);
   };
+  const addtoArchived = async (id, title, description, tag) => {
+    // API Call
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ title, description, tag, archived: true }),
+    });
+    // eslint-disable-next-line
+    const json = await response.json();
+    console.log(json);
+    getArchivedNotes();
+  };
+  const removefromArchived = async (id, title, description, tag) => {
+    // API Call
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ title, description, tag, archived: false }),
+    });
+    // eslint-disable-next-line
+    const json = await response.json();
+    console.log(json);
+    getArchivedNotes();
+
+  };
+
+  const getArchivedNotes = async () => {
+    // API Call
+    //console.log(localStorage.getItem("token"))
+    const response = await fetch(`${host}/api/notes/fetcharchivednotes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    const json = await response.json();
+    setArchivedNotes(json);
+  };
   return (
     <NoteContext.Provider
       value={{
         notes,
         FavouriteNotes,
+        ArchivedNotes,
         addNote,
         deleteNote,
         editNote,
         addtoFavourite,
         removefromFavourite,
+        addtoArchived,
+        removefromArchived,
         getNotes,
         getFavouriteNotes,
+        getArchivedNotes,
+
       }}
     >
       {props.children}

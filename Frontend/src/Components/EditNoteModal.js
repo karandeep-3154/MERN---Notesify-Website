@@ -8,7 +8,7 @@ import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import Box from "@mui/material/Box";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Button from "@mui/material/Button";
+import UnarchiveIcon from "@mui/icons-material/Unarchive";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -32,9 +32,17 @@ export default function BasicModal({
   old_description,
   old_tag,
   old_favourite,
+  old_archived,
 }) {
   const context = useContext(noteContext);
-  const { editNote, addtoFavourite, removefromFavourite } = context;
+  const {
+    editNote,
+    addtoFavourite,
+    removefromFavourite,
+    addtoArchived,
+    removefromArchived,
+    deleteNote,
+  } = context;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -43,6 +51,7 @@ export default function BasicModal({
   const [description, setDescription] = useState(old_description);
   const [tag, setTag] = useState(old_tag);
   const [favourite, setFavourite] = useState(old_favourite);
+  const [archived, setArchived] = useState(old_archived);
 
   const handleTagChange = (e) => {
     setTag(e.target.value);
@@ -70,7 +79,20 @@ export default function BasicModal({
       console.log("clicked for removing", title);
     }
   };
-
+  const handleDelete = () => {
+   deleteNote(note_id);
+  };
+  const changeArchived = () => {
+    if (!archived) {
+      addtoArchived(note_id, title, description, tag);
+      setArchived(true);
+      console.log("clicked for adding", title);
+    } else {
+      removefromArchived(note_id, title, description, tag);
+      setArchived(false);
+      console.log("clicked for removing", title);
+    }
+  };
   useEffect(() => {
     setTitle(old_title);
     setDescription(old_description);
@@ -129,16 +151,26 @@ export default function BasicModal({
 
               <div className="CardFooterRight">
                 <div className="CardActionIconEncloser">
-                  <ArchiveOutlinedIcon
-                    className="CardActionIcon"
-                    sx={{ fontSize: 20 }}
-                  />
+                  {archived ? (
+                    <UnarchiveIcon
+                      style={{ color: "#5466d4" }}
+                      sx={{ fontSize: 22 }}
+                      onClick={() => changeArchived()}
+                    />
+                  ) : (
+                    <ArchiveOutlinedIcon
+                      className="CardActionIcon"
+                      onClick={() => changeArchived()}
+                      sx={{ fontSize: 20 }}
+                    />
+                  )}
                 </div>
 
                 <div className="CardActionIconEncloser">
                   <DeleteOutlinedIcon
                     className="CardActionIcon"
-                    sx={{ fontSize: 20 }}
+                    sx={{ fontSize: 22 }}
+                    onClick = {() => handleDelete()}
                   />
                 </div>
               </div>

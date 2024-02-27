@@ -42,7 +42,7 @@ router.post('/addnote', fetchuser, [
         }
     })
     router.put('/updatenote/:id', fetchuser, async (req, res) => {
-        const { title, description, tag, favourite } = req.body;
+        const { title, description, tag, favourite, archived } = req.body;
         try {
           // Create a newNote object
           const newNote = {};
@@ -56,6 +56,7 @@ router.post('/addnote', fetchuser, [
             newNote.tag = tag;
           }
             newNote.favourite = favourite;
+            newNote.archived = archived;
           
 
           // Find the note to be updated and update it
@@ -111,8 +112,28 @@ router.post('/addnote', fetchuser, [
         console.error(error.message);
         res.status(500).send("Internal Server Error");
       }
-    });
+    });;
+router.get("/fetcharchivednotes", fetchuser, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id, archived: true });
 
+    console.log(notes);
+    res.json(notes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+router.get("/fetchbinnotes", fetchuser, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id, bin: true });
 
+    console.log(notes);
+    res.json(notes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
     
 module.exports = router

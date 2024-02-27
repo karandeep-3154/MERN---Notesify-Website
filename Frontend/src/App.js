@@ -9,7 +9,6 @@ import SignUp from "./Components/SignUp";
 import { useState } from "react";
 import FavouriteNotes from "./Components/FavouriteNotes";
 import ArchivedNotes from "./Components/ArchivedNotes";
-import Bin from "./Components/Bin";
 import Sidebar from "./Components/Sidebar";
 
 const App = () => {
@@ -52,16 +51,7 @@ const App = () => {
                 </div>
               }
             />
-            <Route
-              exact
-              path="/bin"
-              element={
-                <div style={{ display: "flex" }}>
-                  <Sidebar />
-                  <Bin />{" "}
-                </div>
-              }
-            />
+
             <Route
               exact
               path="/about"
