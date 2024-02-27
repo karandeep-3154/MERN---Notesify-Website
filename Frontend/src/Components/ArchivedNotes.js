@@ -13,23 +13,26 @@ const ArchivedNotes = () => {
   return (
     <div className="NotesSection">
       <h2>Your Archived Notes</h2>
-
-      <div>{ArchivedNotes.length === 0 && "No notes to display"}</div>
-      {/* {console.log(archivedNotes)} */}
-      <div className="NotesGrid">
-        {ArchivedNotes.map((note) => {
-          return (
-            <BasicModal
-              note_id={note._id}
-              old_title={note.title}
-              old_description={note.description}
-              old_tag={note.tag}
-              old_favourite={note.favourite}
-              old_archived={note.archived}
-            />
-          );
-        })}
-      </div>
+      {ArchivedNotes.length === 0 ? (
+        <div>
+          <h5>No Archived Notes to Display</h5>
+        </div>
+      ) : (
+        <div className="NotesGrid">
+          {ArchivedNotes.map((note) => {
+            return (
+              <BasicModal
+                note_id={note._id}
+                old_title={note.title}
+                old_description={note.description}
+                old_tag={note.tag}
+                old_favourite={note.favourite}
+                old_archived={note.archived}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
