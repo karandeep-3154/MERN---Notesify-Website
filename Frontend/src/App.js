@@ -24,7 +24,6 @@ const App = () => {
   return (
     <>
       <NoteState>
-        {" "}
         {/*wrapping app in notestate so that state got available to all the components & subcomponents*/}
         <Router>
           <Navbar />

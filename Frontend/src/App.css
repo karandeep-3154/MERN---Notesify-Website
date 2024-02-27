@@ -112,6 +112,7 @@ body {
 
 .NotesSection {
   background-color: #f7f8fb;
+  min-width: 88%;
   padding: 25px;
 }
 

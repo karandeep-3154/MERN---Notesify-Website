@@ -80,13 +80,14 @@ export default function BasicModal({
     }
   };
   const handleDelete = () => {
-   deleteNote(note_id);
+    deleteNote(note_id);
   };
   const changeArchived = () => {
     if (!archived) {
       addtoArchived(note_id, title, description, tag);
       setArchived(true);
       console.log("clicked for adding", title);
+      window.location.reload();
     } else {
       removefromArchived(note_id, title, description, tag);
       setArchived(false);
@@ -161,6 +162,10 @@ export default function BasicModal({
                     <ArchiveOutlinedIcon
                       className="CardActionIcon"
                       onClick={() => changeArchived()}
+                      disabled={favourite}
+                      style={{
+                        color: favourite ? "#ccc" : "",
+                      }}
                       sx={{ fontSize: 20 }}
                     />
                   )}
@@ -170,7 +175,7 @@ export default function BasicModal({
                   <DeleteOutlinedIcon
                     className="CardActionIcon"
                     sx={{ fontSize: 22 }}
-                    onClick = {() => handleDelete()}
+                    onClick={() => handleDelete()}
                   />
                 </div>
               </div>

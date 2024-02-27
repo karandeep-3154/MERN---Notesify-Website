@@ -26,7 +26,6 @@ const ArchivedNotes = () => {
               old_tag={note.tag}
               old_favourite={note.favourite}
               old_archived={note.archived}
-              old_bin={note.bin}
             />
           );
         })}
