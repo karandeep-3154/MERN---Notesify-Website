@@ -10,12 +10,9 @@ import ArchivedNotes from "./Components/ArchivedNotes";
 import Sidebar from "./Components/Sidebar";
 
 const App = () => {
-  //Alert part
-
   return (
     <>
       <NoteState>
-        {/*wrapping app in notestate so that state got available to all the components & subcomponents*/}
         <Router>
           <Routes>
             <Route
@@ -31,34 +28,32 @@ const App = () => {
               exact
               path="/favourites"
               element={
-                <div style={{ display: "flex" }}>
-                  <Sidebar />
-                  <FavouriteNotes />{" "}
-                </div>
+                <>
+                  <Navbar />
+                  <div style={{ display: "flex" }}>
+                    <Sidebar />
+                    <FavouriteNotes />
+                  </div>
+                </>
               }
             />
             <Route
               exact
               path="/archived"
               element={
-                <div style={{ display: "flex" }}>
-                  <Sidebar />
-                  <ArchivedNotes />{" "}
-                </div>
+                <>
+                  <Navbar />
+                  <div style={{ display: "flex" }}>
+                    <Sidebar />
+                    <ArchivedNotes />{" "}
+                  </div>
+                </>
               }
             />
 
             <Route exact path="/about" element={<About />} />
-            <Route
-              exact
-              path="/login"
-              element={<Login />}
-            />
-            <Route
-              exact
-              path="/signup"
-              element={<SignUp  />}
-            />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<SignUp />} />
           </Routes>
         </Router>
       </NoteState>

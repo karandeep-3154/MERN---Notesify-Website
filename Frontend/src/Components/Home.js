@@ -1,17 +1,17 @@
 import React from "react";
 import Notes from "./Notes";
 import Login from "./Login";
-import BasicModal from "./EditNoteModal";
 import Sidebar from "./Sidebar";
-const Home = (props) => {
+const Home = () => {
+  
   return (
     <>
       {!localStorage.getItem("token") ? (
-        <Login showAlert={props.showAlert} />
+        <Login  />
       ) : (
         <div style={{ display: "flex" }}>
           <Sidebar />
-          <Notes showAlert={props.showAlert} />
+          <Notes  />
         </div>
       )}
     </>
