@@ -120,6 +120,7 @@ body {
   position: fixed;
   right: 60px;
   bottom: 60px;
+  z-index: 2;
 }
 #addButton:hover {
   cursor: pointer;
