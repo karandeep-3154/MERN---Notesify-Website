@@ -142,6 +142,10 @@ export default function BasicModal({
                     />
                   ) : (
                     <FavoriteBorderOutlinedIcon
+                      disabled={archived}
+                      style={{
+                        color: archived ? "#ccc" : "",
+                      }}
                       className="CardActionIcon"
                       sx={{ fontSize: 20 }}
                       onClick={() => changeFavourites()}
