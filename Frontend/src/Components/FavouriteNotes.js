@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../Context/Notes/Notecontext";
-import AddNote from "./AddNote";
+import Navbar from "./Navbar";
 import "../App.css";
 import BasicModal from "./EditNoteModal";
 const FavouriteNotes = () => {

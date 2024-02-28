@@ -259,3 +259,113 @@ body {
 
   background-image: linear-gradient(#b10aa4, rgb(70, 70, 190));
 }
+
+/* Login Signup Page CSS */
+.top-container {
+  background-image: linear-gradient(#5562af, #e25dd7);
+  height: 100vh;
+  margin-top: 0;
+  position: relative;
+}
+
+.container {
+  width: 550px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin-left: 495px;
+  margin-top: 80px;
+  background-color: #ffffff;
+  padding-bottom: 30px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.text {
+  color: #3c009d;
+  font-size: 45px;
+  font-weight: 700;
+}
+.underline {
+  width: 61px;
+  height: 6px;
+  background: #3c009d;
+  border-radius: 9px;
+}
+.inputs {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 480px;
+  height: 70px;
+  border-radius: 6px;
+  background-color: #ebeaeb;
+}
+.input img {
+  margin: 0 30px;
+}
+.input input {
+  height: 50px;
+  width: 400px;
+  background: transparent;
+  border: none;
+  outline: none;
+  /* color: 0#797979; */
+  font-size: 19px;
+}
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 40px;
+}
+.submit {
+  margin: 0 auto;
+  width: 220px;
+  height: 59px;
+  color: #fff;
+  background: #4c00b4;
+  border-color: gray transparent;
+  border-radius: 50px;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.submit:hover {
+  background-image: linear-gradient(#b10aa4, rgb(70, 70, 190));
+}
+.submitBelow {
+  color: #1e0349;
+  margin: 0 auto;
+  width: 220px;
+  height: 59px;
+  border-radius: 50px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+#submit-button {
+  margin: 0 7px;
+  width: 130px;
+  height: 49px;
+  color: #bc1db6;
+  border-color: gray transparent;
+  border-radius: 50px;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import noteContext from "../Context/Notes/Notecontext";
 import AddModal from "../Components/AddNote";
 import "../App.css";

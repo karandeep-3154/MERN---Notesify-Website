@@ -1,81 +1,106 @@
-import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import user_icon from "./Assets/person.png";
+import email_icon from "./Assets/email.png";
+import password_icon from "./Assets/password.png";
 const SignUp = (props) => {
-    const [credentials, setCredentials]= useState({ name:"", email:"", password:"", cpassword:""});
-    let navigate= useNavigate();
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  let navigate = useNavigate();
 
-    const HandleSubmit= async (e)=>{
-          e.preventDefault();
-          const { name, email, password} = credentials; //destructuring 
-          //API call
-          const url = `http://localhost:8080/api/auth/createuser`;
-          if(credentials.cpassword !== credentials.password){
-              props.showAlert("Passwords not Matched, Retry!!","warning");
-          }
-          else{
-              const response = await fetch(url, {
-                  method: 'POST',
-                  headers: {
-                  'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ name, email, password})
-              });
-              const json= await response.json();  // parses JSON response into native JavaScript objects
-            //   console.log(json);   
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, password } = credentials; //destructuring
+    //API call
+    const url = `http://localhost:8080/api/auth/createuser`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+    const json = await response.json(); // parses JSON response into native JavaScript objects
+    console.log(JSON.stringify({ name, email, password }), json);
 
-              if(json.success){  //using our backend variable success to check whether request succeed or not
-                  //saving the authToken and redirecting(using useNavigate(earlier we use useHistory), hook in react-router-dom)
-               //  console.log("before")
-                 //console.log(json.authtoken)
-                  localStorage.setItem("token", json.authtoken); //storing token in localstorage (note: in backend also token sending by json should be in name authtoken)
-            
-          //  console.log("after")      //  console.log(json.authtoken)
-                  props.showAlert("Account Created Successfully","success");
-                  navigate("/");  //recirecting using useNavigate
-              }
-              else{
-                  props.showAlert(json.error,"danger");
-              }
-          }
+    if (json.success) {
+      localStorage.setItem("token", json.authtoken); //storing token in localstorage (note: in backend also token sending by json should be in name authtoken)
+
+      navigate("/"); //recirecting using useNavigate
     }
-    const onChange=(e)=>{
-      //using spread operator(...), all properties of note object stays, but if extra props specified then add them or overwrite them
-      setCredentials({...credentials, [e.target.name]:e.target.value})  //will update the credentials
-    }
+  };
 
-    return (
-      <div className='container mt-4'>
-        <h1 className='mb-4'><b>SignUp</b></h1>
-        <form onSubmit={HandleSubmit}> {/*biggest advantage of using onsubmit is we can add required and other authetication feilds directly */}
-         
-          <div className="mb-3">
-              <label htmlFor="name" className="form-label"><b>Name</b></label>
-              <input type="text" className="form-control" id="name" name='name'placeholder='Enter Your Name of Min. 4 Characters' onChange={onChange}/>
+  const onChange = (e) => {
+    //using spread operator(...), all properties of note object stays, but if extra props specified then add them or overwrite them
+    setCredentials({ ...credentials, [e.target.name]: e.target.value }); //will update the credentials
+  };
+
+  return (
+    <div className="top-container">
+      <div
+        className="container"
+        style={{ marginTop: "40px", width: "600px", marginLeft: "468px" }}
+      >
+        <div className="header">
+          <div className="text">SignUp</div>
+          <div className="underline"></div>
+        </div>
+        <div className="inputs" style={{ marginTop: "33px" }}>
+          <div className="input">
+            <img src={user_icon} alt="pass_icon" />
+            <input
+              name="name"
+              type="name"
+              onChange={onChange}
+              placeholder="Name"
+            />
           </div>
-          <div className="mb-3">
-              <label htmlFor="email" className="form-label"><b>Email Address</b></label>
-              <input type="email" className="form-control" id="email" placeholder='Enter Your Email' name='email' aria-describedby="emailHelp" onChange={onChange} required/>
+          <div className="input">
+            <img src={email_icon} alt="user_icon" />
+            <input
+              name="email"
+              type="email"
+              onChange={onChange}
+              placeholder="Email Id"
+            />
           </div>
-          <div className="mb-3">
-              <label htmlFor="password" className="form-label"><b>Password</b></label>
-              <input type="password" className="form-control" id="password" name='password' placeholder='Enter The Password of minimum 5 Characters'onChange={onChange} required minLength={5}/>
-              <div id="passwordHelpBlock" className="form-text">
-              Password's should be of atleast 5 character length
-              </div>
+          <div className="input">
+            <img src={password_icon} alt="pass_icon" />
+            <input
+              name="password"
+              type="password"
+              onChange={onChange}
+              placeholder="Password"
+            />
           </div>
-          <div className="mb-3">
-              <label htmlFor="cpassword" className="form-label"><b>Confirm Password</b></label>
-              <input type="password" className="form-control" id="cpassword" name='cpassword' onChange={onChange} required/>
-              <div id="passwordHelpBlock" className="form-text">
-              Should match with Password
-              </div>
+        </div>
+        <div
+          className="submit-container"
+          style={{ marginTop: "33px", gap: "20px" }}
+        >
+          <button className="submit" onClick={handleSubmit}>
+            SignUp
+          </button>
+          <div className="submitBelow" style={{ width: "250px" }}>
+            Already have an Account?{" "}
+            <span
+              id="submit-button"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              <u>Login</u>
+            </span>
+            Here!
           </div>
-          
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        </div>
       </div>
-    )
-}
+    </div>
+  );
+};
 
 export default SignUp;
