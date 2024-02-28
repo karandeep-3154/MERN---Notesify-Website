@@ -15,15 +15,7 @@ const App = () => {
       <NoteState>
         <Router>
           <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <>
-                  <Navbar /> <Home />
-                </>
-              }
-            />
+            <Route exact path="/" element={<Home />} />
             <Route
               exact
               path="/favourites"
