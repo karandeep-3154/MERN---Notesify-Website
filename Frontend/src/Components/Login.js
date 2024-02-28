@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      "https://mern-notesify-website-backend.vercel.app/api/auth/login",
+      "https://mern-notesify-website.onrender.com/api/auth/login",
       {
         method: "POST",
         headers: {
