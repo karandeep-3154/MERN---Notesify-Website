@@ -16,7 +16,7 @@ const SignUp = (props) => {
     e.preventDefault();
     const { name, email, password } = credentials; //destructuring
     //API call
-    const url = `http://localhost:8080/api/auth/createuser`;
+    const url = `https://mern-notesify-website-backend.vercel.app/api/auth/createuser`;
     const response = await fetch(url, {
       method: "POST",
       headers: {

@@ -10,11 +10,7 @@ const port = process.env.PORT || 8080; // Use port from environment variable or 
 
 // Middleware
 app.use(
-  cors({
-    origin: "https://karandeep-notesify.vercel.app/",
-    methods: ["POST", "PUT", "GET", "DELETE"],
-    credentials: true,
-  })
+  cors()
 );
 app.use(express.json());
 

@@ -2,7 +2,7 @@ import NoteContext from "./Notecontext";
 import { useState } from "react";
 
 const NoteState = (props) => {
-  const host = "http://localhost:8080";
+  const host = "https://mern-notesify-website-backend.vercel.app";
   const notesInitial = [];
   const [notes, setNotes] = useState(notesInitial);
   const [FavouriteNotes, setFavouriteNotes] = useState([]);
