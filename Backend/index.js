@@ -9,7 +9,13 @@ const app = express();
 const port = process.env.PORT || 8080; // Use port from environment variable or default to 8080
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://karandeep-notesify.vercel.app/",
+    methods: ["POST", "PUT", "GET", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
