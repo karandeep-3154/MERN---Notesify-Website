@@ -10,6 +10,8 @@ const SignUp = (props) => {
     email: "",
     password: "",
   });
+  const [errorReceived, setError] = useState("");
+
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -31,12 +33,16 @@ const SignUp = (props) => {
       localStorage.setItem("token", json.authtoken); //storing token in localstorage (note: in backend also token sending by json should be in name authtoken)
 
       navigate("/"); //recirecting using useNavigate
+    } else {
+      setError(json.errors[0].msg);
+      console.log("msgg", json.errors[0].msg, errorReceived);
     }
   };
 
   const onChange = (e) => {
     //using spread operator(...), all properties of note object stays, but if extra props specified then add them or overwrite them
     setCredentials({ ...credentials, [e.target.name]: e.target.value }); //will update the credentials
+    setError("");
   };
 
   return (
@@ -78,6 +84,11 @@ const SignUp = (props) => {
             />
           </div>
         </div>
+        {errorReceived ? (
+          <div className="ErrorContainer">{errorReceived}</div>
+        ) : (
+          <></>
+        )}
         <div
           className="submit-container"
           style={{ marginTop: "33px", gap: "20px" }}

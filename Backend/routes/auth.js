@@ -9,7 +9,7 @@ const JWT_SECRET = "GETAGOODPLACEMTASSOONASPOSSIBLE";
 router.post(
   "/createuser",
   [
-    body("name", "Enter a name of Minimum length 4").isLength({ min: 4 }),
+    body("name", "Enter a name of Minimum length 3").isLength({ min: 4 }),
 
 // First Parameter of above line means validation should be applied to the "name" field of the request body. The second parameter is an optional error message that will be sent if the validation fails. In this case, it's indicating that the user should enter a name with a minimum length of 4 characters.
 
@@ -23,7 +23,7 @@ router.post(
     const errors = validationResult(req);
 // The validationResult() function is used to retrieve the results of the validation that was performed on the request body using the middleware provided by the express-validator package. 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(201).json({ success, errors: errors.array() });
     }
 
     try {
@@ -32,7 +32,7 @@ router.post(
 
       if (user)
         return res
-          .status(400)
+          .status(201)
           .json({
             success,
             error: "Sorry, a User already exists with this Email Id",

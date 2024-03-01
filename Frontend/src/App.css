@@ -337,7 +337,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 .submit {
   margin: 0 auto;
@@ -374,4 +374,10 @@ body {
   font-size: 19px;
   font-weight: 700;
   cursor: pointer;
+}
+.ErrorContainer {
+  margin-top: 30px;
+  margin-left: 135px;
+  margin-bottom: 0;
+  font-size: 15px;
 }
